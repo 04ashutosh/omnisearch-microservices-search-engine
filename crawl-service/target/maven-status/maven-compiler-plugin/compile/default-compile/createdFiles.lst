@@ -1,0 +1,5 @@
+com\omnisearch\crawl\dto\CrawlRequest.class
+com\omnisearch\crawl\service\CrawlerService.class
+com\omnisearch\crawl\controller\CrawlController.class
+com\omnisearch\crawl\CrawlServiceApplication.class
+com\omnisearch\crawl\service\CrawlerService$CrawlTask.class

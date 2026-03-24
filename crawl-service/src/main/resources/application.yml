@@ -1,0 +1,12 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: crawl-service
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092 #Our Docker Kakfa Broker
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      # This automatically turns our Java objects into JSON before sending to Kafka!
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

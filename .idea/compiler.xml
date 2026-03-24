@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="indexer-service" />
+        <module name="omnisearch (1)" />
+        <module name="crawl-service" />
+        <module name="search-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="src" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
+      <module name="crawl-service" options="-parameters" />
+      <module name="indexer-service" options="-parameters" />
+      <module name="omnisearch (1)" options="-parameters" />
+      <module name="omnisearch (2)" options="" />
+      <module name="search-service" options="-parameters" />
+      <module name="src" options="-parameters" />
+    </option>
+  </component>
+</project>
