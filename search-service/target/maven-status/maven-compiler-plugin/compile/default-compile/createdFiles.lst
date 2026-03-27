@@ -1,0 +1,6 @@
+com\omnisearch\search\dto\SearchResult.class
+com\omnisearch\search\controller\SearchController.class
+com\omnisearch\search\repository\SearchRepository.class
+com\omnisearch\search\entity\WebDocument.class
+com\omnisearch\search\SearchServiceApplication.class
+com\omnisearch\search\service\SearchService.class
