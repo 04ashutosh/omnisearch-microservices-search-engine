@@ -75,6 +75,5 @@ public class CrawlerService {
         } catch(Exception e){
             log.error("Crawl error {}: {}",url,e.getMessage());
         }
-        }
     }
 }

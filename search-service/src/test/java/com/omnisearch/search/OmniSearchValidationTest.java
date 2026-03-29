@@ -57,17 +57,34 @@ public class OmniSearchValidationTest {
 
     // --- SearchService Mapping Tests (2) ---
     @Test void testServiceFormat() {
-        SearchRepository mockRepo = Mockito.mock(SearchRepository.class);
-        SearchService service = new SearchService(mockRepo);
+        org.springframework.data.elasticsearch.core.ElasticsearchOperations mockOps = Mockito.mock(org.springframework.data.elasticsearch.core.ElasticsearchOperations.class);
+        SearchService service = new SearchService(mockOps);
         WebDocument dummy = doc("id", "title", "content");
-        Mockito.when(mockRepo.findByTitleMatchesOrContentMatches("query", "query")).thenReturn(Collections.singletonList(dummy));
+        
+        org.springframework.data.elasticsearch.core.SearchHits<WebDocument> mockHits = Mockito.mock(org.springframework.data.elasticsearch.core.SearchHits.class);
+        org.springframework.data.elasticsearch.core.SearchHit<WebDocument> mockHit = Mockito.mock(org.springframework.data.elasticsearch.core.SearchHit.class);
+        Mockito.when(mockHit.getContent()).thenReturn(dummy);
+        Mockito.when(mockHit.getHighlightFields()).thenReturn(Collections.emptyMap());
+        Mockito.when(mockHits.getSearchHits()).thenReturn(Collections.singletonList(mockHit));
+        Mockito.when(mockOps.search(Mockito.any(org.springframework.data.elasticsearch.core.query.Query.class), Mockito.eq(WebDocument.class))).thenReturn(mockHits);
+        
         assertEquals(1, service.search("query").size());
     }
     
     @Test void testServiceMultiFormat() {
-        SearchRepository mockRepo = Mockito.mock(SearchRepository.class);
-        SearchService service = new SearchService(mockRepo);
-        Mockito.when(mockRepo.findByTitleMatchesOrContentMatches("query", "query")).thenReturn(Arrays.asList(doc("1", "2", "3"), doc("4", "5", "6")));
+        org.springframework.data.elasticsearch.core.ElasticsearchOperations mockOps = Mockito.mock(org.springframework.data.elasticsearch.core.ElasticsearchOperations.class);
+        SearchService service = new SearchService(mockOps);
+        
+        org.springframework.data.elasticsearch.core.SearchHits<WebDocument> mockHits = Mockito.mock(org.springframework.data.elasticsearch.core.SearchHits.class);
+        org.springframework.data.elasticsearch.core.SearchHit<WebDocument> mockHit1 = Mockito.mock(org.springframework.data.elasticsearch.core.SearchHit.class);
+        org.springframework.data.elasticsearch.core.SearchHit<WebDocument> mockHit2 = Mockito.mock(org.springframework.data.elasticsearch.core.SearchHit.class);
+        Mockito.when(mockHit1.getContent()).thenReturn(doc("1", "2", "3"));
+        Mockito.when(mockHit1.getHighlightFields()).thenReturn(Collections.emptyMap());
+        Mockito.when(mockHit2.getContent()).thenReturn(doc("4", "5", "6"));
+        Mockito.when(mockHit2.getHighlightFields()).thenReturn(Collections.emptyMap());
+        Mockito.when(mockHits.getSearchHits()).thenReturn(Arrays.asList(mockHit1, mockHit2));
+        Mockito.when(mockOps.search(Mockito.any(org.springframework.data.elasticsearch.core.query.Query.class), Mockito.eq(WebDocument.class))).thenReturn(mockHits);
+        
         assertEquals(2, service.search("query").size());
     }
 }
