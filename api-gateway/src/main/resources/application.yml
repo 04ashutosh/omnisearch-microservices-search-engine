@@ -16,3 +16,13 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/search/**
+
+# Push 100% of Traces to the Zipkin UI
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # Tells Micrometer to send every single trace to Zipkin
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+      

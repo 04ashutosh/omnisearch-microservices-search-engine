@@ -8,3 +8,20 @@ spring:
   #Connect only to the Database (Read-Only)
   elasticseach:
     uris: localhost:9200
+  
+  #Connect to Redis
+  redis:
+    host: localhost
+    port: 6379
+  cache:
+    redis:
+      time-to-live: 5m
+
+# Push 100% of Traces to the Zipkin UI
+management:
+  tracing:
+    sampling:
+      probability: 1.0 # Tells Micrometer to send every single trace to Zipkin
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans

@@ -1,4 +1,0 @@
-com\omnisearch\indexer\entity\WebDocument.class
-com\omnisearch\indexer\service\IndexerService.class
-com\omnisearch\indexer\repository\WebDocumentRepository.class
-com\omnisearch\indexer\IndexerServiceApplication.class
