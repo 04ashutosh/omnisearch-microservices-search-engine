@@ -2,6 +2,11 @@ server:
   port: 8080
 
 spring:
+  #Connect to the Redis Memory Bank
+  data:
+    redis:
+      host: localhost
+      port: 6379
   application:
     name: api-gateway
   cloud:
@@ -16,6 +21,15 @@ spring:
           uri: http://localhost:8082
           predicates:
             - Path=/search/**
+          # Add the Filter mathematically throttling IPs
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5 #Add 5 tokens per second
+                redis-rate-limiter.burstCapacity: 10 #Max 10 absolute simultaneous requests
+                redis-rate-limiter.requestedTokens: 1 #Cost: 1 Token per request
+
+  
 
 # Push 100% of Traces to the Zipkin UI
 management:
