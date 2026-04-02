@@ -11,7 +11,7 @@ spring:
       bootstrap-servers: localhost:9902
       group-id: indexer-group #If we run 5 instances of the indexer, they share load instead of doing duplicate work!
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kakfa.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.omnisearch.common" #Crucial: Allows Kafka to decode your PageCrawledEvent object safely.
 
